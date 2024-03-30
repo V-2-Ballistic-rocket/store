@@ -54,58 +54,58 @@
                 kpp - длина до 9 (только цифры)
                 login - длина до 30 символов
 
-        Для добавления пользователя в бд введите в терминале:
-            curl --location 'http://localhost/user' \
-            --header 'Content-Type: application/json' \
-            --data '{
-                "login":"some_login",
-                "inn":123456789,
-                "kpp":213456678
-            }'
-        Или в postman:
-            POST http://localhost/user
-            Body->raw:
-                {
+        Создание пользователя:
+            Для добавления пользователя в бд введите в терминале:
+                curl --location 'http://localhost/user' \
+                --header 'Content-Type: application/json' \
+                --data '{
                     "login":"some_login",
                     "inn":123456789,
                     "kpp":213456678
-                }
+                }'
+            Или в postman:
+                POST http://localhost/user
+                Body->raw:
+                    {
+                        "login":"some_login",
+                        "inn":123456789,
+                        "kpp":213456678
+                    }
+            В качестве ответа проект вернёт id нового пользователя.
 
-        В качестве ответа проект вернёт id нового пользователя.
+        Вывод пользователя:
+            Для вывода данных о пользователе по id в терминале:
+                curl --location 'http://localhost/user/1'
+            В postman:
+                GET http://localhost/user/1
+            Проет вернет данные о пользователе с id = 1
 
+        Изменение пользователя:
+            Для изменения данных о пользователе по id в терминале:
+                curl --location --request PUT 'http://localhost/user/4' \
+                --header 'Content-Type: application/json' \
+                --data '{
+                    "login":"4_login",
+                    "inn":123456789,
+                    "kpp":213456678
+                }'
+            Или в postman:
+                PUT http://localhost/user/4
+                Body->raw:
+                   {
+                       "login":"4_login",
+                       "inn":123456789,
+                       "kpp":213456678
+                   }
+            Пользователь с id = 4 будет изменён.
+            Важно: чтобы изменить пользователя с id = 4 нужно сначала создать этого пользователя
 
-        Для вывода данных о пользователе по id в терминале:
-            curl --location 'http://localhost/user/1'
-        В postman:
-            GET http://localhost/user/1
-        Проет вернет данные о пользователе с id = 1
-
-
-        Для изменения данных о пользователе по id в терминале:
-            curl --location --request PUT 'http://localhost/user/4' \
-            --header 'Content-Type: application/json' \
-            --data '{
-                "login":"4_login",
-                "inn":123456789,
-                "kpp":213456678
-            }'
-        Или в postman:
-            PUT http://localhost/user/4
-            Body->raw:
-               {
-                   "login":"4_login",
-                   "inn":123456789,
-                   "kpp":213456678
-               }
-        Пользователь с id = 4 будет изменён.
-        Важно: чтобы изменить пользователя с id = 4 нужно сначала создать этого пользователя
-
-
-        Для удаления пользователя в терминале:
-            curl --location --request DELETE 'http://localhost/user/4'
-        В postman:
-            DELETE http://localhost/user/4
-        Пользователь с id = 4 сотрется из бд
+        Удаление пользователя:
+            Для удаления пользователя в терминале:
+                curl --location --request DELETE 'http://localhost/user/4'
+            В postman:
+                DELETE http://localhost/user/4
+            Пользователь с id = 4 сотрется из бд
 
 
         Пользователи с id = 1 и id = 3 нужны для тестирования
@@ -125,67 +125,67 @@
 
                 description  - длина до 300 символов
 
-
-            Для добавления Товара в бд введите в терминале:
-                curl --location 'http://localhost/product' \
-                --header 'Content-Type: application/json' \
-                --data '{
-                    "product_code":"12-345",
-                    "price":"999,99",
-                    "product_name":"product_name",
-                    "description":"description"
-                }'
-            Или в postman:
-                POST http://localhost/product
-                Body->raw:
-                    {
+            Добавление товара:
+                Для добавления Товара в бд введите в терминале:
+                    curl --location 'http://localhost/product' \
+                    --header 'Content-Type: application/json' \
+                    --data '{
                         "product_code":"12-345",
                         "price":"999,99",
                         "product_name":"product_name",
                         "description":"description"
-                    }
+                    }'
+                Или в postman:
+                    POST http://localhost/product
+                    Body->raw:
+                        {
+                            "product_code":"12-345",
+                            "price":"999,99",
+                            "product_name":"product_name",
+                            "description":"description"
+                        }
+    
+                В качестве ответа проект вернёт id нового Товара.
 
-            В качестве ответа проект вернёт id нового Товара.
+            Вывод товара:
+                Для вывода данных о Товаре по id в терминале:
+                    curl --location 'http://localhost/product/1'
+                В postman:
+                    GET http://localhost/product/1
+                Проет вернет данные о Товаре с id = 1
 
+            Изменение товара:
+                Для изменения данных о Товаре по id в терминале:
+                    curl --location --request PUT 'http://localhost/product/4' \
+                    --header 'Content-Type: application/json' \
+                    --data '{
+                        "product_code":"12-345",
+                        "price":"999,99",
+                        "product_name":"product_name_4",
+                        "description":"description_4"
+                    }'
+                Или в postman:
+                    PUT http://localhost/product/4
+                    Body->raw:
+                       {
+                           "product_code":"12-345",
+                           "price":"999,99",
+                           "product_name":"product_name_4",
+                           "description":"description_4"
+                       }
+                Товар с id = 4 будет изменён.
+                Важно: чтобы изменить Товар с id = 4 нужно сначала создать этот Товар
 
-            Для вывода данных о Товаре по id в терминале:
-                curl --location 'http://localhost/product/1'
-            В postman:
-                GET http://localhost/product/1
-            Проет вернет данные о Товаре с id = 1
-
-
-            Для изменения данных о Товаре по id в терминале:
-                curl --location --request PUT 'http://localhost/product/4' \
-                --header 'Content-Type: application/json' \
-                --data '{
-                    "product_code":"12-345",
-                    "price":"999,99",
-                    "product_name":"product_name_4",
-                    "description":"description_4"
-                }'
-            Или в postman:
-                PUT http://localhost/product/4
-                Body->raw:
-                   {
-                       "product_code":"12-345",
-                       "price":"999,99",
-                       "product_name":"product_name_4",
-                       "description":"description_4"
-                   }
-            Товар с id = 4 будет изменён.
-            Важно: чтобы изменить Товар с id = 4 нужно сначала создать этот Товар
-
-
-            Для удаления Товара в терминале:
-                curl --location --request DELETE 'http://localhost/product/4'
-            В postman:
-                DELETE http://localhost/product/4
-            Товар с id = 4 сотрется из бд
-
-
-            Товары с id = 1 и id = 3 нужны для тестирования
-            и создаюся каждый раз при любой операции проекта
+            Удаление товара:
+                Для удаления Товара в терминале:
+                    curl --location --request DELETE 'http://localhost/product/4'
+                В postman:
+                    DELETE http://localhost/product/4
+                Товар с id = 4 сотрется из бд
+    
+    
+                Товары с id = 1 и id = 3 нужны для тестирования
+                и создаюся каждый раз при любой операции проекта
 
 ------------------------------------------------ 3. СТЕК ТЕХНОЛОГИЙ ----------------------------------------------------
 
