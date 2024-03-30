@@ -39,6 +39,11 @@
 
     Для использования убедитесь что docker-контейнеры запущены.
 
+    Если у вас в процессе использования вылезит ошибка типа:
+        Warning: fopen(../var/log/Logs.csv): Failed to open stream: Permission denied in /app/src/Core/Logger.php on line 15
+    то выдайте права на чтение и изменение для папки /var/log/,
+    или выключите логгер исправив константу LOGGER_ON на false в файле conf/settings.php
+
     2.1. CRUD методы над сущностью user:
 
         Немного о валидности данных пользователя:
