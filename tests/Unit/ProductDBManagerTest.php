@@ -3,10 +3,10 @@
 
 namespace Tests\Unit;
 
-use App\Service\DBDTO;
 use App\Entity\Product;
+use App\Service\DbDto;
+use App\Service\Product\ProductDbManager;
 use Tests\Support\UnitTester;
-use App\Service\ProductDBManager;
 
 class ProductDBManagerTest extends \Codeception\Test\Unit
 {
@@ -31,8 +31,8 @@ class ProductDBManagerTest extends \Codeception\Test\Unit
      */
     public function testInvalidId(int $id)
     {
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $result = $productDBmanager->getProduct($dto);
         $this->tester->assertNull($result);
     }
@@ -51,21 +51,21 @@ class ProductDBManagerTest extends \Codeception\Test\Unit
      */
     public function testValidId(int $id)
     {
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $expectedResult = $productDBmanager->getProduct($dto);
         $actualResult = array('123-456', '11,11', 'product name 1', 'description 1');
         $this->tester->assertEquals($expectedResult->getArray(), $actualResult);
     }
 
     public function testAddProduct(){
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $product = new Product('000-000', '100,00', '0000000', 'description 0000');
         $id = $productDBmanager->addProduct($product, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $result = $productDBmanager->getProduct($dto);
 
         $this->tester->assertEquals($product->getArray(), $result->getArray());
@@ -74,13 +74,13 @@ class ProductDBManagerTest extends \Codeception\Test\Unit
     }
 
     public function testEditProduct(){
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $product = new Product('000-000', '100,00', '0000000', 'description 0000');
         $id = $productDBmanager->addProduct($product, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $product = new Product('77-7777', '7,77', '777777', 'description 7777777');
         $productDBmanager->editProduct($product, $dto);
         $result = $productDBmanager->getProduct($dto);
@@ -91,13 +91,13 @@ class ProductDBManagerTest extends \Codeception\Test\Unit
     }
 
     public function testDeleteProduct(){
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $product = new Product('000-000', '100,00', '0000000', 'description 0000');
         $id = $productDBmanager->addProduct($product, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $productDBmanager->deleteProduct($dto);
 
         $this->tester->assertNull($productDBmanager->getProduct($dto));
@@ -107,8 +107,8 @@ class ProductDBManagerTest extends \Codeception\Test\Unit
 
     public function testGetProduct()
     {
-        $productDBmanager = new ProductDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 1);
+        $productDBmanager = new ProductDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 1);
 
         $expectedResult = $productDBmanager->getProduct($dto);
         

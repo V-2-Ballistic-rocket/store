@@ -4,9 +4,9 @@
 namespace Tests\Unit;
 
 use App\Entity\User;
-use App\Service\DBDTO;
+use App\Service\DbDto;
+use App\Service\User\UserDbManager;
 use Tests\Support\UnitTester;
-use App\Service\UserDBManager;
 
 class UserDBManagerTest extends \Codeception\Test\Unit
 {
@@ -31,8 +31,8 @@ class UserDBManagerTest extends \Codeception\Test\Unit
      */
     public function testInvalidId(int $id)
     {
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $result = $userDBManager->getUser($dto);
         $this->tester->assertNull($result);
     }
@@ -51,21 +51,21 @@ class UserDBManagerTest extends \Codeception\Test\Unit
      */
     public function testValidId(int $id)
     {
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $expectedResult = $userDBManager->getUser($dto);
         $actualResult = array('login 1', '012345678910', '123456789');
         $this->tester->assertEquals($expectedResult->getArray(), $actualResult);
     }
 
     public function testAddUser(){
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $user = new User('tmp user', '012345678910', '123456789');
         $id = $userDBManager->addUser($user, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $result = $userDBManager->getUser($dto);
 
         $this->tester->assertEquals($user->getArray(), $result->getArray());
@@ -74,13 +74,13 @@ class UserDBManagerTest extends \Codeception\Test\Unit
     }
 
     public function testEditUser(){
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $user = new User('tmp user', '012345678910', '123456789');
         $id = $userDBManager->addUser($user, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $user = new User('tmp user 2', '000000000000', '999999999');
         $userDBManager->editUser($user, $dto);
         $result = $userDBManager->getUser($dto);
@@ -91,13 +91,13 @@ class UserDBManagerTest extends \Codeception\Test\Unit
     }
 
     public function testDeleteUser(){
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 0);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 0);
 
         $user = new User('tmp user', '012345678910', '123456789');
         $id = $userDBManager->addUser($user, $dto);
         
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', $id);
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', $id);
         $userDBManager->deleteUser($dto);
 
         $this->tester->assertNull($userDBManager->getUser($dto));
@@ -107,8 +107,8 @@ class UserDBManagerTest extends \Codeception\Test\Unit
 
     public function testGetUser()
     {
-        $userDBManager = new UserDBManager();
-        $dto = new DBDTO('pgsql','database','app','postgres','postgres','public/database.sql', 1);
+        $userDBManager = new UserDbManager();
+        $dto = new DbDto('pgsql','database','app','postgres','postgres','public/database.sql', 1);
         $expectedResult = $userDBManager->getUser($dto);
         $actualResult = array('login 1', '012345678910', '123456789');
         $this->tester->assertEquals($expectedResult->getArray(), $actualResult);

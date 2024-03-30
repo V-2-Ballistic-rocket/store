@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Validator\User;
+namespace App\common\Validators;
 
 use App\Entity\User;
 

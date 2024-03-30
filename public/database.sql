@@ -22,33 +22,32 @@ CREATE TABLE IF NOT EXISTS public.product_params (
 );
 
 INSERT INTO product (product_id ,product_code, price, product_name, description)
-SELECT 1, '123-456', '11,11', 'product name 1', 'description 1'
+SELECT 1, '123-456', '11,11', 'test_product_1', 'description test'
 WHERE
 NOT EXISTS (
 SELECT product_id FROM product WHERE product_id = 1
 );
 
 INSERT INTO product (product_id ,product_code, price, product_name, description)
-SELECT 3, '345-456', '33,11', 'product name 3', 'description 3'
+SELECT 3, '345-456', '33,11', 'test_product_2', 'description test'
 WHERE
 NOT EXISTS (
 SELECT product_id FROM product WHERE product_id = 3
 );
 
 INSERT INTO users (user_id, login, inn, kpp)
-SELECT 1, 'login 1', '012345678910', '123456789'
+SELECT 1, 'test_user_1', '012345678910', '123456789'
 WHERE
 NOT EXISTS (
 SELECT user_id FROM users WHERE user_id = 1
 );
 
 INSERT INTO users (user_id, login, inn, kpp)
-SELECT 3, 'login 3', '012345678910', '123456789'
+SELECT 3, 'test_user_2', '012345678910', '123456789'
 WHERE
 NOT EXISTS (
 SELECT user_id FROM users WHERE user_id = 3
 );
-
 
 DELETE FROM product WHERE product_id = 2;
 DELETE FROM users WHERE user_id = 2;

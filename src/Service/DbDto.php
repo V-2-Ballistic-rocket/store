@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class DBDTO
+class DbDto
 {
     public function __construct(
         public readonly string $database,

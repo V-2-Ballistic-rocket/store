@@ -3,8 +3,8 @@
 
 namespace Tests\Unit;
 
+use App\common\Validators\ProductSchemeValidator;
 use Tests\Support\UnitTester;
-use App\Service\Validator\Product\ProductSchemeValidator;
 
 class ProductSchemeValidatorTest extends \Codeception\Test\Unit
 {

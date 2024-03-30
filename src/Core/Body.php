@@ -2,13 +2,13 @@
 
 namespace App\Core;
 
-use App\Service\DBDTO;
+use App\Service\DbDto;
 
 class Body
 {
     public function __construct(
         private ?array $phpInputData,
-        private DBDTO $dBDTO
+        private DbDto $dBDTO
         )
     {}
 
@@ -17,7 +17,7 @@ class Body
         return $this->phpInputData;
     }
 
-    public function getDBDTO() : DBDTO
+    public function getDBDTO() : DbDto
     {
         return $this->dBDTO;
     }

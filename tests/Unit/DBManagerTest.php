@@ -15,7 +15,7 @@ class DBManagerTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        // $this->db = new ProductDBManager(
+        // $this->db = new ProductDbManager(
         //     'public/database.sql',
         //     'pgsql',
         //     'database',

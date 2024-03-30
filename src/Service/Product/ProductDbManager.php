@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Product;
 
-use PDO;
-use App\Service\DBDTO;
 use App\Entity\Product;
+use App\Service\DbDto;
+use PDO;
 
-class ProductDBManager
+class ProductDbManager
 {
 
-    public function dbInit(DBDTO $dto) : PDO
+    public function dbInit(DbDto $dto) : PDO
     {
         $DBH = new PDO
         (
@@ -24,7 +24,7 @@ class ProductDBManager
         return $DBH;
     }
 
-    public function getProduct(DBDTO $dto) : ?Product
+    public function getProduct(DbDto $dto) : ?Product
     {
         $result = $this->dbInit($dto)->query(
             "SELECT product_code, price, product_name, description FROM product WHERE product_id = {$dto->id};")
@@ -37,7 +37,7 @@ class ProductDBManager
         return ProductDataMapper::mapFromScheme($result);
     }
 
-    public function addProduct(Product $product, DBDTO $dto) : int
+    public function addProduct(Product $product, DbDto $dto) : int
     {
         $DBH = $this->dbInit($dto);
         $DBH->query("INSERT INTO product (product_code, price, product_name, description)
@@ -46,7 +46,7 @@ class ProductDBManager
         return $DBH->lastInsertId();
     }
 
-    public function editProduct(Product $product, DBDTO $dto) : void
+    public function editProduct(Product $product, DbDto $dto) : void
     {
         $this->dbInit($dto)->query(
             "UPDATE product
@@ -54,7 +54,7 @@ class ProductDBManager
             WHERE product_id = {$dto->id}");
     }
 
-    public function deleteProduct(DBDTO $dto) : void
+    public function deleteProduct(DbDto $dto) : void
     {
         $this->dbInit($dto)->query("DELETE FROM product WHERE product_id = {$dto->id}");
     }

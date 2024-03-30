@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Entity\User;
 
@@ -11,13 +11,12 @@ class UserDataMapper
         return new User($userScheme['login'], $userScheme['inn'], $userScheme['kpp']);
     }
 
-    static public function mopToScheme(User $user) : array
+    static public function mapToScheme(User $user) : array
     {
-        return array
-        (
+        return [
             'login' => $user->getLogin(),
             'inn' => $user->getInn(),
             'kpp' => $user->getKpp()
-        );
+        ];
     }
 }

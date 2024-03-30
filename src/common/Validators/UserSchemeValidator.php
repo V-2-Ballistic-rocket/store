@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Service\Validator\User;
-
-use App\Service\Validator\User\UserValidator;
+namespace App\common\Validators;
 
 class UserSchemeValidator extends UserValidator
 {

@@ -3,12 +3,9 @@
 
 namespace Tests\Unit;
 
+use App\common\Validators\ProductValidator;
 use App\Entity\Product;
 use Tests\Support\UnitTester;
-use App\Service\Validator\Product\ProductValidator;
-
-
-
 
 
 class ProductValidatorTest extends \Codeception\Test\Unit

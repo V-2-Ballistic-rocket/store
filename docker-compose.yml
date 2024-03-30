@@ -20,6 +20,7 @@ services:
   #   environment:
   #     REDIS_ARGS: --requirepass ${REDIS_PASSWORD:-redis-stack-password}
   php-fpm:
+    container_name: php-fpm-store
     build: ./docker/php-fpm
     volumes:
       - ./:/app
